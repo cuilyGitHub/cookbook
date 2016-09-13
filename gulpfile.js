@@ -60,7 +60,7 @@ gulp.task('watch-html',function(){
 });
 
 gulp.task('watch-less',function(){
-    gulp.watch(['./assets/less/*.js'],['reload']);
+    gulp.watch(['./assets/less/*.less'],['reload']);
 });
 
 gulp.task('watch-js',function(){

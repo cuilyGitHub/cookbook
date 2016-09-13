@@ -1,1 +1,3 @@
-alert('1');
+var React = require('react');
+var ReactDOM = require('react-dom');
+
