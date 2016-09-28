@@ -11,6 +11,13 @@ var BoxWrap = React.createClass({
     }
 });
 
+//大标题
+var HeadlineWrap = React.createClass({
+    render: function(){
+        return <div className='big_title'>{this.props.name}</div>
+    }
+});
+
 //描述
 var DesWrap = React.createClass({
     render: function(){
@@ -21,35 +28,23 @@ var DesWrap = React.createClass({
     }
 });
 
-//大标题
-var HeadlineWrap = React.createClass({
-    render: function(){
-        return <div className='big_title'>{this.props.name}</div>
-    }
-});
-
 //图片
 var ImageWrap = React.createClass({
     render: function(){
         return  <div className='content_box'>
-                   <HeadlineWrap name='小黄瓜燕麦煎饼'/>
-                   <img className="banner" src='assets/images/10.jpg' />
+                   <HeadlineWrap name={this.props.reqData.name}/>
+                   <img className="banner" src={this.props.reqData.exihibitpic} />
                 </div>
     }
 });
 
 //标签
-var data = [
-  {name: "小黄瓜", company: "2根"},
-  {name: "小黄", company: "5根"},
-  {name: "盐", company: "5根"}
-];
-
 var LabelWrap = React.createClass({
     render: function(){
+		var data = [];
         var items = this.props.data.map(function(item){
             return (
-                <div className="label">{item.name}</div>
+                <div className="label" key={item.id}>{item.name}</div>
             )
         });
         return <BoxWrap title={this.props.title}>
@@ -60,27 +55,24 @@ var LabelWrap = React.createClass({
     }
 });
 
-//列表
-var data = [
-  {name: "小黄瓜", company: "2根"},
-  {name: "小黄", company: "5根"},
-  {name: "盐", company: "5根"}
-];
-
+//列表组件
 var ListWrap = React.createClass({
     render: function(){
+		var data = [];
         var items = this.props.data.map(function(item){
             return (
-                <tr className='row'>
+                <tr className='row' key={item.id}>
                     <td className='rank left'>{item.name}</td>
-                    <td className='rank right'>{item.company}</td>
+                    <td className='rank right'>{item.portion}</td>
                 </tr>
             );
         });
         return (
             <BoxWrap title={this.props.title}>
                 <table className='list'>
-                    {items}
+                    <tbody>
+                        {items}
+                    </tbody>
                 </table>
             </BoxWrap>
         );
@@ -88,25 +80,22 @@ var ListWrap = React.createClass({
 });
 
 //图文组件
-var step =[
-  {url: "assets/images/1.jpg", des: "材料：鸡蛋，黄瓜，洋葱酥（宜家有售），燕麦和面粉",seq:1},
-  {url: "assets/images/1.jpg", des: "材料：鸡蛋，黄瓜，洋葱酥（宜家有售），燕麦和面粉",seq:2},
-  {seq:4,url: "assets/images/1.jpg", des: "材料：鸡蛋，黄瓜，洋葱酥（宜家有售），燕麦和面粉"}
-];
 var StepWrap = React.createClass({
     render: function(){
         var items = this.props.data.map(function(item){
             return (
-                 <tr className="img_des">
-                    <td><img className="img" src={item.url}/></td>
-                    <td className="des"><span>{item.seq}</span>{item.des}</td>
-                 </tr>
+                <tr className="img_des" key={item.id}>
+                    <td><img className="img" src={item.image}/></td>
+                    <td className="des"><span>{item.seq}</span>{item.describe}</td>
+                </tr>   
             )
         });
         return (
             <BoxWrap title={this.props.title}>
                 <table className="img_des_box">
-                    {items}
+                    <tbody>
+                        {items}
+                    </tbody>
                 </table>
             </BoxWrap>
         )
@@ -117,15 +106,27 @@ var StepWrap = React.createClass({
 //ajax
 var GetData = React.createClass({
 
-    componentDidMount: function(){
+	getInitialState:function(){
+		return {
+			data:'',
+			tagList:[],
+			materialList:[],
+			procedureList:[]
+		};
+	},
 
+    componentDidMount: function(){
         $.ajax({
             url:this.props.source,
-            dataType:'jsonp',
+            dataType:'json',
             jsonp: "callback",
             success:function(data){
-                data = JSON.parse(data);
-                this.setState({data: data});
+                this.setState({
+						data: data,
+						tagList: data.tag,
+						materialList: data.material,
+						procedureList: data.procedure
+					});
             }.bind(this),
             error:function(xhr,status,err){
                  console.error(this.props.url, status, err.toString());
@@ -136,47 +137,35 @@ var GetData = React.createClass({
     componentWillUnmount: function(){
         this.serverRequest.abort();
     },
+	
     render:function(){
         return (
-            <div></div>
+			<div>
+				<ImageWrap reqData={this.state.data}></ImageWrap>
+				<LabelWrap title='标签' data={this.state.tagList}></LabelWrap>
+				<DesWrap title='简介' des={this.state.data.introduce}></DesWrap>
+				<ListWrap title='用料' data={this.state.materialList}></ListWrap>
+				<StepWrap title='做法' data={this.state.procedureList}></StepWrap>
+				<DesWrap title='营养小贴士' des={this.state.data.tips}></DesWrap>
+			</div>
         )
     }
-
-
-
 });
 
+//获取url参数
+function getRequest(){
+	var url = window.location.href;
+	console.log(url);
+}
+getRequest();
+
+
+var dataId = '';
+var requestURL = "http://218.240.151.115:8081/api/recipes/158";
+
 ReactDOM.render(
-  <GetData source="http://218.240.151.115:8081/api/recipes/112/" />,
+  <GetData source={requestURL}/>,
   document.getElementById('data')
-);
-
-
-
-
-ReactDOM.render(
-    <ImageWrap/>,
-    document.getElementById('image')
-);
-ReactDOM.render(
-    <LabelWrap data={data}/>,
-    document.getElementById('label')
-);
-ReactDOM.render(
-    <DesWrap title='简介' des='早餐我很喜欢做这样的煎饼来吃，配一杯豆浆或者薏米糊，一份水果，营养就很全面了。小黄瓜香味清新，燕麦健康，加上非常少油的煎制，好吃营养无负担！燕麦可以换成全麦粉或者其他杂粮粉哦！'/>,
-    document.getElementById('synopsis')
-);
-ReactDOM.render(
-    <ListWrap title='用料' data={data}/>,
-    document.getElementById('material')
-);
-ReactDOM.render(
-    <StepWrap title='做法' data={step}/>,
-    document.getElementById('step')
-);
-ReactDOM.render(
-    <DesWrap title='营养小贴士' des='我平时炒菜的标配就是平底锅和一双无漆的筷子。平底锅炒菜即使用很少的油，也不会有炒不开，糊锅的情况发生。'/>,
-    document.getElementById('prompt')
 );
 
 

@@ -13,7 +13,7 @@ gulp.task('connect',function(cb){
     connect.server({
         root:'.',
         livereload:true,
-        port:85
+        port:1500
     });
     cb();
 });
@@ -81,3 +81,4 @@ gulp.task('watch-js',function(){
 
 gulp.task('compile',['less','browserify']);
 gulp.task('default',['compile', 'connect','watch']);
+gulp.task('port',['compile','watch']);
