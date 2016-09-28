@@ -1,10 +1,56 @@
 /*分辨屏幕大小*/
-@media only screen and (max-width: 320px){
+@media only screen and (max-width: 414px){
+    .phone;
+}
+@media only screen and (min-width: 768px){
+    html{
+        font-size: 70px;
+    }
+     .box{
+        margin:10%;
+    }
+    .content_box{
+        margin:1.5% 5%;
+        clear: both;
+    }
+}
+@media only screen and (min-width: 992px){
+    html{
+        font-size: 100px;
+    }
+     .box{
+        margin:10%;
+    }
+    .content_box{
+        margin:1.5% 5%;
+        clear: both;
+    }    
+}
+@media only screen and (min-width: 1200px){
+    html{
+        font-size: 150px;
+    }
+    .box{
+        margin:5% 20%;
+    }
+    .content_box{
+        margin:1.5% 5%;
+        clear: both;
+    }
+}
+
+html,body,ul,li,p{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.phone{
     html{
         font-size: 55px;
     }
     .content_box{
-         margin:2% 5%;
+        margin:1.5% 5%;
         clear: both;
     }
     .img_des_box{
@@ -33,57 +79,12 @@
         }
     }
 }
-@media only screen and (min-width: 321px){
-    html{
-        font-size: 55px;
-    }
-    .content_box{
-         margin:2% 5%;
-        clear: both;
-    }
-}
-@media only screen and (min-width: 768px){
-    html{
-        font-size: 70px;
-    }
-     .box{
-        margin:10%;
-    }
-    .content_box{
-        margin:5%;
-        clear: both;
-    }
-}
-@media only screen and (min-width: 992px){
-    html{
-        font-size: 100px;
-    }
-     .box{
-        margin:10%;
-    }
-    .content_box{
-         margin:5%;
-        clear: both;
-    }    
-}
-@media only screen and (min-width: 1200px){
-    html{
-        font-size: 150px;
-    }
-    .box{
-        margin:5% 20%;
-    }
-    .content_box{
-        margin:5%;
-        clear: both;
-    }
-}
-
 
 /*container*/
 
 /*logo*/
 .logo{
+    margin: 0 5%;
     width: 100%;
     height: 0.8rem;
     background:url('../images/logo.png') left no-repeat;
@@ -167,7 +168,7 @@
         margin-bottom: 0.5rem;
         .img{
             display: block;
-            width: 2rem;
+            width: 3rem;
             padding-top:0.2rem; 
         }
         .des{

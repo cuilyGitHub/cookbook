@@ -31,12 +31,24 @@ gulp.task('less',function(){
 //将模块化js脚本打包成一个js文件
 gulp.task('browserify',function(){
     return browserify('./src/app.js',{debug:true})
-    .transform(babelify)
+    .transform(babelify.configure({presets: ['es2015', 'react']}))
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(rename({basename:'app', extname: '.js'}))
     .pipe(gulp.dest('./assets/js/'));
 });
+
+
+gulp.task('compose', function(){
+  return browserify('./app/assets/javascripts/main.js', {debug: true})
+    .transform(babelify.configure({presets: ['es2015', 'react']}))
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(rename({basename: 'main'}))
+    .pipe(gulp.dest('./public/assets/global/scripts/'));
+});
+
+
 
 //压缩js脚本
 gulp.task('uglify',['browserify'],function(){
