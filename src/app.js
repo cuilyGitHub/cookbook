@@ -84,19 +84,17 @@ var StepWrap = React.createClass({
     render: function(){
         var items = this.props.data.map(function(item){
             return (
-                <tr className="img_des" key={item.id}>
-                    <td><img className="img" src={item.image}/></td>
-                    <td className="des"><span>{item.seq}</span>{item.describe}</td>
-                </tr>   
+                <li className="img_des" key={item.id}>
+                    <div><img className="img" src={item.image}/></div>
+                    <div className="des"><span>{item.seq}</span>{item.describe}</div>
+                </li>   
             )
         });
         return (
             <BoxWrap title={this.props.title}>
-                <table className="img_des_box">
-                    <tbody>
-                        {items}
-                    </tbody>
-                </table>
+                <ul className="img_des_box">
+					{items}
+			    </ul>
             </BoxWrap>
         )
     }
@@ -153,15 +151,14 @@ var GetData = React.createClass({
 });
 
 //获取url参数
-function getRequest(){
-	var url = window.location.href;
-	console.log(url);
-}
-getRequest();
+function getQueryString(name) { 
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+	var r = window.location.search.substr(1).match(reg); 
+	if (r != null) return unescape(r[2]); return null; 
+} 
+var id = getQueryString('state');
 
-
-var dataId = '';
-var requestURL = "http://218.240.151.115:8081/api/recipes/158";
+var requestURL = "http://218.240.151.115:8081/api/recipes/"+id;
 
 ReactDOM.render(
   <GetData source={requestURL}/>,
