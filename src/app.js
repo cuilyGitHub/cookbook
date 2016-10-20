@@ -14,6 +14,9 @@ var BoxWrap = React.createClass({
 //描述
 var DesWrap = React.createClass({
     render: function(){
+        if(!this.props.des){
+            return null;
+        };
         return <BoxWrap controller={this.props.controller} title={this.props.title}>
                     <p className="des">{this.props.des}</p>
                </BoxWrap>
@@ -58,8 +61,8 @@ var ListWrap = React.createClass({
         var items = this.props.data.map(function(item){
             return (
                 <tr className='row' key={item.id}>
-                    <td className='rank'>{item.name}</td>
-                    <td className='rank'>{item.portion}</td>
+                    <td className='rank left'>{item.name}</td>
+                    <td className='rank right'>{item.portion}</td>
                 </tr>
             );
         });
@@ -163,9 +166,9 @@ function getQueryString(name) {
 } 
 var id = getQueryString('state');
 
-//var requestURL = "http://caimiao.yijiayinong.com:8081/api/recipes/"+id;
+var requestURL = "http://caimiao.yijiayinong.com:8081/api/recipes/"+id;
 //var requestURL = 'http://218.240.151.115:8080/api/recipes/'+id;
-var requestURL = "http://localhost:1500/data.json";
+//var requestURL = "http://localhost:1500/data.json";
 
 ReactDOM.render(
   <GetData source={requestURL}/>,

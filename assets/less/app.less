@@ -1,27 +1,38 @@
 /*分辨屏幕大小*/
+@media screen and (max-width: 2500px){
+    html{
+        font-size: 70px;
+        color: #26261F;
+        font-family: 'STHeitiSC-Light',"Microsoft YaHei" ! important;
+        width: 650px;
+        margin: 5rem auto;
+    }
+}
 @media screen and (max-width: 800px){
      html{
+        width: auto;
+        margin: 0;
         font-size: 80px;
-        font-family: "Microsoft YaHei" ! important;
+        color: #26261F;
+        font-family: 'STHeitiSC-Light',"Microsoft YaHei" ! important;
     }
 }
 @media screen and (max-width: 500px){
      html{
         font-size: 55px;
-        font-family: "Microsoft YaHei" ! important;
+        color: #26261F;
+        font-family: 'STHeitiSC-Light',"Microsoft YaHei" ! important;
     }
 }
 @media screen and (max-width: 360px){
      html{
         font-size: 50px;
-        font-family: "Microsoft YaHei" ! important;
-    }
-    .label_box{
-        width:4.4rem!important;
+        color: #26261F;
+        font-family: 'STHeitiSC-Light',"Microsoft YaHei" ! important;
     }
 }
 
-body, ul, li, h1, h2, h3, h4, h5, h6, p, form, dl, dt, dd { margin: 0px; padding: 0px; font-size: 12px; font-weight: normal; }
+body, ul, li, h1, h2, h3, h4, h5, h6, p, form, dl, dt, dd {margin: 0px; padding: 0px; font-weight: normal; }
 ul { list-style: none; }
 img { border-style: none;display: block; }
 
@@ -45,7 +56,7 @@ img { border-style: none;display: block; }
     width: 100%;
     height: 0.8rem;
     line-height: 0.8rem;
-    font-size: 0.6rem;
+    font-size: 0.4em;
     text-align: center;
     display: none;
     margin-top:0.3rem;
@@ -54,13 +65,14 @@ img { border-style: none;display: block; }
     width: 100%;
     height: 0.6rem;
     line-height: 0.6rem;
-    font-size: 0.5rem;
+    font-size: 0.35rem;
     color: #c8beac;
     text-align: center;
+    margin-top:0.8rem;
 }
 .border_box{
     padding-bottom: 0.3rem;
-    border-bottom:1px dashed #ccc;
+    border-bottom:1px dashed #e3e3e3;
 }
 /*img*/
 .banner{
@@ -68,30 +80,33 @@ img { border-style: none;display: block; }
 }
 /*label*/
 .lab{
-    border-bottom:1px dashed #ccc;
+    border-bottom:1px dashed #e3e3e3;
 }
 .label_box{
     overflow: hidden;
-    width:6.6rem;
+    width:4.3rem;
     margin:0.4rem auto;
+    display: table;
     .label{
-        width: 1.8rem;
+        width: 1rem;
         padding: 0.1rem;
-        font-size: 0.3rem;
+        font-size: 0.2rem;
         text-align: center;
         background: #fcbea6; 
+        display: table-cell;
+        vertical-align: middle;
         float: left;
         margin:0.1rem;
     }
 }
 /*TextDescription*/
 .des{
-    font-size: 0.4rem;
-    margin: 0.4rem 0.5rem;
+    font-size: 0.25rem;
+    margin: 0.4rem 0.3rem;
     line-height: 0.6rem;
 }
 .des_border{
-    font-size: 0.4rem;
+    font-size: 0.25rem;
     margin: 0 0.3rem;
     padding: 0.4rem 0;
     line-height: 0.6rem;
@@ -111,9 +126,15 @@ img { border-style: none;display: block; }
             width: 50%;
             height: 0.8rem;
             line-height: 0.8rem;
-            font-size: 0.4rem;
-            border-bottom:1px dashed #ccc;
-            text-align: center;
+            font-size: 0.25rem;
+            border-bottom:1px dashed #e3e3e3;
+        }
+        .left{
+            padding-left: 0.8rem;
+        }
+        .right{
+            padding-right: 0.7rem;
+            text-align: right;
         }
     }
 }
@@ -126,7 +147,7 @@ img { border-style: none;display: block; }
             width: 0.4rem;
             float: left;
             color: red;
-            font-size: 0.5rem;
+            font-size: 0.3rem;
         }
         .img{
             width:90%;
@@ -135,8 +156,11 @@ img { border-style: none;display: block; }
         .step_des{
             width: 90%;
             display: block;
-            font-size: 0.4rem;
-            margin: 0.4rem 0.3rem;
+            font-size: 0.25rem;
+            margin-top: 0.1rem;
+            margin-bottom: 0.4rem;
+            margin-left: 0.4rem;
+            margin-right: 0.3rem;
             line-height: 0.6rem;
         }
     }
